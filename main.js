@@ -6,6 +6,7 @@ const buttonEnd = document.getElementById("buttonEnd");
 const buttonInfo = document.getElementById("buttonInfo");
 const buttonStartIcon = document.getElementById("buttonStartIcon");
 const buttonEndIcon = document.getElementById("buttonEndIcon");
+const helpText = document.getElementById("helpText");
 
 let currentWord = "";
 let history = [];
@@ -33,7 +34,7 @@ function startGame() {
 
   buttonEnd.onclick = function() { endGame() };
   buttonEnd.classList.remove("disabled");
-  buttonInfo.classList.add("disabled");
+  // buttonInfo.classList.add("disabled");
   buttonStartIcon.classList.add("la-redo-alt");
   buttonEndIcon.classList.add("la-skull-crossbones");
 
@@ -80,6 +81,7 @@ function addPiece() {
 
 function checkWord(event) {
   if (event.keyCode !== 13) return;
+  helpText.classList.add('hide');
 
   event.preventDefault();
 
@@ -181,11 +183,18 @@ function scoreBoard() {
   warning();
 
   buttonEnd.classList.add("disabled");
-  buttonInfo.classList.remove("disabled");
+  //buttonInfo.classList.remove("disabled");
   buttonStartIcon.classList.remove("la-redo-alt");
   buttonEndIcon.classList.remove("la-skull-crossbones");
 }
-
+function help() {
+  if (currentWord === '') return;
+  const listText = words[currentWord]
+  if (listText.length > 0) {
+    helpText.innerHTML = listText[0];
+    helpText.classList.remove('hide');
+  }
+}
 function about() {
   scoreDisplay.innerHTML = null;
 
@@ -213,7 +222,7 @@ function about() {
   `;
 
   buttonEnd.classList.remove("disabled");
-  buttonInfo.classList.add("disabled");
+  //buttonInfo.classList.add("disabled");
   buttonStartIcon.classList.remove("la-redo-alt");
   buttonEndIcon.classList.remove("la-skull-crossbones");
 }
